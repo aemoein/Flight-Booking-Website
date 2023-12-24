@@ -5,7 +5,7 @@ body {
 }
 
 .hero {
-    background: #6F2DA8;
+    background: #FD9308;
     color: #FEFBEA;
     text-align: left;
     padding: 100px 30px; 
@@ -13,7 +13,7 @@ body {
 }
 
 .hero h1 {
-    font-size: 2.5em;
+    font-size: 3.5em;
     margin-bottom: 20px;
     font-weight: bold;
 }
@@ -26,9 +26,9 @@ body {
 
 button {
     padding: 10px 20px;
-    font-size: 1em;
+    font-size: 1.1em;
     background: #FEFBEA;
-    color: #6F2DA8;
+    color: #FD9308;
     border: none;
     cursor: pointer;
     border-radius: 5px;
@@ -51,11 +51,10 @@ button:hover {
 .ux h1 {
   text-align: center;
   font-family: SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
-  color: #6F2DA8;
-  -webkit-background-clip: text;
+  color: #FD9308;
   will-change: transform;
   overflow: hidden;
-  font-size: 40px;
+  font-size: 35px;
   font-weight: 2500;
   font-weight: bold;
   letter-spacing: 0px;
@@ -74,7 +73,7 @@ button:hover {
 }
 
 .ux-container{
-  background-color: #6F2DA8;
+  background-color: #FD9308;
   padding: 5px;
 }
 
@@ -101,13 +100,12 @@ button:hover {
 .user-info h2{
   text-align: center;
   font-family: SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
-  color: #6F2DA8;
-  -webkit-background-clip: text;
+  color: #FD9308;
   will-change: transform;
   overflow: hidden;
   margin-bottom: 0;
   margin-top: 10px;
-  font-size: 35px;
+  font-size: 30px;
   font-weight: bold;
   letter-spacing: 0px;
 }
@@ -116,8 +114,7 @@ button:hover {
   font-family: SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
   text-align: center;
   color: transparent;
-  color: #6F2DA8;
-  -webkit-background-clip: text;
+  color: #FD9308;
   margin: 0;
   will-change: transform;
   overflow: hidden;
@@ -130,8 +127,7 @@ button:hover {
 .user-review-text {
   font-family: SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
   text-align: center;
-  color: #6F2DA8;
-  -webkit-background-clip: text;
+  color: #FD9308;
   will-change: transform;
   overflow: hidden;
   font-size: 15px;
