@@ -5,7 +5,7 @@ body {
 }
 
 .hero {
-    background: #FD9308;
+    background: #6F2DA8;
     color: #FEFBEA;
     text-align: left;
     padding: 100px 30px; 
@@ -28,7 +28,7 @@ button {
     padding: 10px 20px;
     font-size: 1em;
     background: #FEFBEA;
-    color: #FD9308;
+    color: #6F2DA8;
     border: none;
     cursor: pointer;
     border-radius: 5px;
@@ -37,4 +37,112 @@ button {
 
 button:hover {
     background: #FDEBD0;
+}
+
+.ux
+{
+  background-image: #FEFBEA;/*linear-gradient(315deg,#7366ff,#ff6cab);*/
+  display: block;
+  overflow: hidden;
+  height: fit-content;
+  align-items: center;
+}
+
+.ux h1 {
+  text-align: center;
+  font-family: SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
+  color: #6F2DA8;
+  -webkit-background-clip: text;
+  will-change: transform;
+  overflow: hidden;
+  font-size: 40px;
+  font-weight: 2500;
+  font-weight: bold;
+  letter-spacing: 0px;
+}
+
+.uxcards
+{
+  display: flex;
+  margin-left: 2%;
+  margin-right: 2%;
+  border-radius: 15px;
+  overflow: hidden;
+  width: 96%;
+  height: fit-content;
+  align-items: center;
+}
+
+.ux-container{
+  background-color: #6F2DA8;
+  padding: 5px;
+}
+
+.user-review {
+  margin: 20px;
+  align-items: center;
+}
+
+.user-info {
+  display: block;
+  align-items: center;
+  align-content: center;
+}
+
+.imageuser {
+  display: flex;
+  justify-content: center;
+}
+
+.user-info img{
+  align-self: center;
+}
+
+.user-info h2{
+  text-align: center;
+  font-family: SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
+  color: #6F2DA8;
+  -webkit-background-clip: text;
+  will-change: transform;
+  overflow: hidden;
+  margin-bottom: 0;
+  margin-top: 10px;
+  font-size: 35px;
+  font-weight: bold;
+  letter-spacing: 0px;
+}
+
+.user-info p {
+  font-family: SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
+  text-align: center;
+  color: transparent;
+  color: #6F2DA8;
+  -webkit-background-clip: text;
+  margin: 0;
+  will-change: transform;
+  overflow: hidden;
+  font-size: 20px;
+  font-weight: 2500;
+  font-weight: bold;
+  letter-spacing: 0px;
+}
+
+.user-review-text {
+  font-family: SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
+  text-align: center;
+  color: #6F2DA8;
+  -webkit-background-clip: text;
+  will-change: transform;
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 2500;
+  font-weight: normal;
+  letter-spacing: 0px;
+}
+
+.user-review img {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  object-fit: cover;
 }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Flight Booking System - Passenger Info</title>
+    <link rel="stylesheet" href="signup.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="info.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1><a href="index.html" style="text-decoration: none; color: inherit;">FlyEase</a></h1>
+        </div>
+    </nav>    
+
+    <div class="signx-form">
+        <h2>Passenger Information</h2>
+        <form id="passengerInfoForm" method="post">
+            <label for="photo">Photo:</label>
+            <input type="file" id="photo" name="photo" accept="image/*" required>
+
+            <label for="passportImg">Passport Image:</label>
+            <input type="file" id="passportImg" name="passportImg" accept="image/*" required>
+
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</body>
+</html>
