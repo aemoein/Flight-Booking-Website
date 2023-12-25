@@ -6,7 +6,6 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="info.js"></script>
 
     <script>
         function getQueryParam(name) {
@@ -34,7 +33,10 @@
 
     <div class="signx-form">
         <h2>Company Information</h2>
-        <form id="companyInfoForm" method="post" action="process_company_info.php" enctype="multipart/form-data">
+        <form id="companyInfoForm" method="post" action="../Backend/process_company_info.php" enctype="multipart/form-data">
+            <!-- Add a hidden input field for the email parameter -->
+            <input type="hidden" id="email" name="email">
+            
             <label for="bio">Bio:</label>
             <textarea id="bio" name="bio" rows="4" required></textarea>
 
