@@ -1,15 +1,18 @@
 $(document).ready(function () {
-    $("#signupForm").submit(function (event) {
-        event.preventDefault(); // Prevent the default form submission behavior
-
-        // Get the selected user type
+    function updateFormAction() {
         var userType = $("#userType").val();
+        var form = $("#signupForm");
+        var email = $("#email").val();
 
-        // Redirect to the appropriate page based on the user type
         if (userType === "company") {
-            window.location.href = "company_info.html";
+            console.log("Setting action for company");
+            form.attr("action", "company_info.html?email=" + encodeURIComponent(email));
         } else if (userType === "passenger") {
-            window.location.href = "passenger_info.html";
+            console.log("Setting action for passenger");
+            form.attr("action", "passenger_info.html?email=" + encodeURIComponent(email));
         }
-    });
+    }
+
+    updateFormAction();
+    $("#userType").on("change", updateFormAction);
 });

@@ -7,6 +7,23 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="info.js"></script>
+
+    <script>
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        $(document).ready(function () {
+            const email = getQueryParam("email");
+            if (email) {
+                alert("Email: " + email);
+
+                // Set the email value to the hidden input field
+                $("#email").val(email);
+            }
+        });
+    </script>
 </head>
 <body>
     <nav class="navbar">
@@ -17,7 +34,7 @@
 
     <div class="signx-form">
         <h2>Company Information</h2>
-        <form id="companyInfoForm" method="post">
+        <form id="companyInfoForm" method="post" action="process_company_info.php" enctype="multipart/form-data">
             <label for="bio">Bio:</label>
             <textarea id="bio" name="bio" rows="4" required></textarea>
 

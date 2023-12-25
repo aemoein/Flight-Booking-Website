@@ -7,6 +7,23 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="info.js"></script>
+
+    <script>
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        $(document).ready(function () {
+            const email = getQueryParam("email");
+            if (email) {
+                alert("Email: " + email);
+
+                // Set the email value to the hidden input field
+                $("#email").val(email);
+            }
+        });
+    </script>
 </head>
 <body>
     <nav class="navbar">
@@ -17,7 +34,10 @@
 
     <div class="signx-form">
         <h2>Passenger Information</h2>
-        <form id="passengerInfoForm" method="post">
+        <form id="passengerInfoForm" method="post" action="upload_passenger_info.php" enctype="multipart/form-data">
+            <!-- Add a hidden input field for the email parameter -->
+            <input type="hidden" id="email" name="email">
+
             <label for="photo">Photo:</label>
             <input type="file" id="photo" name="photo" accept="image/*" required>
 
