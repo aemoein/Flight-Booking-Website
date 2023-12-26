@@ -1,0 +1,84 @@
+/* Add your CSS code here */
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #fff4e8;
+  }
+  
+  header, footer {
+    background-color: #FD9308;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .container {
+    display: flex;
+  }
+  
+  .sidenav {
+    background-color: #000;
+    color: #ffffff;
+    border-bottom-right-radius: 25px;
+    height: 86%;
+    overflow-x: hidden;
+    padding-top: 20px;
+    width: 250px;
+  }
+  
+  .search-box {
+    width: 60%;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 20px;
+  }
+  
+  .row {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  select, input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  footer {
+    margin-top: auto;
+  }
+
+  .result-box{
+    width: 60%;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 20px;
+  }
+  

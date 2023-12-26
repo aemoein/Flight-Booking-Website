@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlyEase</title>
+  <link rel="stylesheet" href="style.css"> <!-- Link to external CSS file -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>FlyEase</h1>
+  </header>
+
+  <div class="container">
+    <div class="sidenav">
+      <!-- Add sidebar content here -->
+      <h2>Sidebar</h2>
+      <p>This is a sidebar with some content.</p>
+    </div>
+
+    <div class="search-box">
+        <div class="row">
+            <label for="from">From:</label>
+            <select id="from" required>
+              <option value="">Select</option>
+              <option value="city1">City 1</option>
+              <option value="city2">City 2</option>
+              <!-- Add more options as needed -->
+            </select>
+          </div>
+          <div class="row">
+            <label for="to">Destination:</label>
+            <select id="to" required>
+              <option value="">Select</option>
+              <option value="cityA">City A</option>
+              <option value="cityB">City B</option>
+              <!-- Add more options as needed -->
+            </select>
+          </div>
+          <div class="row">
+            <label for="fromDate">From Date:</label>
+            <input type="date" id="fromDate" required>
+          </div>
+          <div class="row">
+            <label for="toDate">To Date:</label>
+            <input type="date" id="toDate">
+          </div>
+          
+      <button onclick="searchFlights()">Search</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2023 FlyEase</p>
+  </footer>
+
+<script>
+function searchFlights() {
+  // Retrieve form values
+  var from = $('#from').val();
+  var to = $('#to').val();
+  var fromDateRaw = $('#fromDate').val();
+  var toDateRaw = $('#toDate').val();
+
+  // Check for empty values
+  if (!from || !to || !fromDateRaw || !toDateRaw) {
+    console.log("Please fill in all fields");
+    return;
+  }
+
+  // Log form values to the console
+  console.log("From:", from);
+  console.log("To:", to);
+  console.log("From Date (Raw):", fromDateRaw);
+  console.log("To Date (Raw):", toDateRaw);
+
+  // Format dates as YYYY-MM-DD
+  var fromDate = formatDate(fromDateRaw);
+  var toDate = formatDate(toDateRaw);
+
+  // Log formatted dates to the console
+  console.log("Formatted From Date:", fromDate);
+  console.log("Formatted To Date:", toDate);
+
+  // Create an AJAX request using jQuery
+  $.ajax({
+    type: 'POST',
+    url: 'results.php',
+    data: {
+      from: from,
+      to: to,
+      fromDate: fromDate,
+      toDate: toDate
+    },
+    success: function(response) {
+      // Log the response from the server to the console
+      console.log("Server Response:", response);
+
+      // Check if the response indicates success (you may need to adjust this based on your server response)
+      if (response.indexOf("success") !== -1) {
+        // Redirect to the search results page
+        window.location.href = 'results.php';
+      } else {
+        console.log("Search failed");
+      }
+    },
+    error: function(xhr, status, error) {
+      // Log any errors to the console
+      console.error("Error:", status, error);
+    }
+  });
+}
+
+// Function to format date as YYYY-MM-DD
+function formatDate(rawDate) {
+  var date = new Date(rawDate);
+  var year = date.getFullYear();
+  var month = ('0' + (date.getMonth() + 1)).slice(-2);
+  var day = ('0' + date.getDate()).slice(-2);
+  return year + '-' + month + '-' + day;
+}
+</script>
+
+</body>
+</html>
