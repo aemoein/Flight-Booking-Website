@@ -31,10 +31,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Redirect based on userType
                 if ($userType == 'passenger') {
-                    header("Location: ../Frontend/passenger_dashboard.html");
+                    header("Location: ../Frontend/passenger_dashboard.php?email=" . urlencode($email));
                     exit();
                 } elseif ($userType == 'company') {
-                    header("Location: ../Frontend/company_dashboard.html");
+                    header("Location: ../Frontend/company_dashboard.php?email=" . urlencode($email));
                     exit();
                 } else {
                     // Handle other user types or show an error message

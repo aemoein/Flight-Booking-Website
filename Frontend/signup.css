@@ -80,3 +80,11 @@ button:hover {
 textarea {
     width: 98.5%;
 }
+
+.profile-data {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    border-radius: 8px;
+}
