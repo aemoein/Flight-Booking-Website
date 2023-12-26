@@ -1,0 +1,175 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-'TT Hoves Variable',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+}
+
+body{
+    min-height: 100vh;
+}
+
+.header{
+    position: fixed;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 0.85rem rgba(12,14,28,.08);
+}
+
+.logo{
+    color: black;
+    text-decoration: none;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.navbar a{
+    position: relative;
+    color:black;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+.navbar a::before{
+    content: '';
+    position: absolute;
+    top: 100% ;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: black;
+    transition: 0.3s;
+}
+
+.navbar a:hover::before{
+    width: 100%;
+}
+
+.user-img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    
+}
+
+#photo{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    
+}
+
+.home{
+    /* border: black solid 2px; */
+    width: 60%;
+    margin-left: 20%;
+    padding-top: 150px ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+h1{
+    font-size: 44px;
+    
+}
+
+.allInfo{
+    /* border: black solid 2px; */
+    margin-left: 50px;
+    height: 150px;
+    width: 300px ;
+}
+
+.info{
+    color: #212a30;
+    font-size: 13px;
+}
+
+.data{
+    /* border: black solid 2px; */
+    padding: 10px;
+    display: flex;
+    justify-content:space-between;
+    margin-top: 10px;
+   
+}
+
+.in{
+    font-size: 16px; 
+    font-weight: 600;
+    height: 30px;
+    position: relative;
+}
+
+.do{
+    
+    display: flex;
+    margin-top: 50px;
+    padding-left: 33%;
+    padding-bottom: 2px;
+    border-bottom: #dfe1e3 solid 1px;
+    position: relative;
+    overflow-x: auto;
+    
+}
+
+.do button{
+    position: relative;
+    color:grey;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 40px;
+    border: 0px;
+    padding: 10px;
+    background-color: white;
+}
+
+.do button::before,
+.do button:hover::before,
+.do button.active::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: grey;
+    transition: 0.3s;
+}
+
+.do button:hover::before{
+    width: 100%;
+    background: grey;
+}
+.do button.active::before {
+    width: 100%;
+    background: black;
+}
+
+.do button.active {
+    color: black;
+}
+
+table {
+    margin: 0 auto;
+    margin-top: 20px;
+    
+}
+
+h2 {
+    text-align: center; 
+    margin-top: 20px;
+}
+
+.active {
+    border-bottom: 2px solid black;
+}
