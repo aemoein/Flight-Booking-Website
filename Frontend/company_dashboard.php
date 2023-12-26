@@ -67,10 +67,10 @@
         $email = $_GET['email'];
 
         try {
-            echo "Email: " . $email . "<br>";
+            //echo "Email: " . $email . "<br>";
 
             $user_id = getUserIdByEmail($email);
-            echo "User ID: " . $user_id . "<br>";
+            //echo "User ID: " . $user_id . "<br>";
 
             // Fetch company information based on the user ID
             $sqlCompany = "SELECT username, logo_img_path FROM company_data WHERE user_id = ?";
@@ -95,8 +95,8 @@
                 $companyName = $rowCompany['username'];
                 $logoImagePath = $rowCompany['logo_img_path'];
 
-                echo "Company Name: " . $companyName . "<br>";
-                echo "Logo Image Path: " . $logoImagePath . "<br>";
+                //echo "Company Name: " . $companyName . "<br>";
+                //echo "Logo Image Path: " . $logoImagePath . "<br>";
             } else {
                 // Handle the case where company data is not found
                 $companyName = "Company Not Found";
@@ -114,7 +114,7 @@
             <h1><a href="index.html" style="text-decoration: none; color: inherit;">FlyEase</a></h1>
         </div>
         <ul>
-            <li><a href="#">Home</a></li>
+            <li><a href="/Flight-Booking-Website/Frontend/company_dashboard.php?email=<?php echo $email ?>">Home</a></li>
             <li><a href="#">Add Flight</a></li>
             <li><a href="#">Flights</a></li>
             <li><a href="/Flight-Booking-Website/Frontend/company_profile.php/<?php echo $user_id ?>">Profile</a></li>
@@ -133,8 +133,7 @@
         </div>
     </div>
     </section>
-    
-    <!-- List of Flights Section -->
+
     <section id="flight-list">
         <h3>Flights</h3>
         <div class="flight-cards-container">

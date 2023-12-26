@@ -23,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
 
-            // Check if the entered password matches the stored hash
             if (password_verify($password, $row['password'])) {
                 // Authentication successful
                 $userType = $row['userType'];
