@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="P_home.css">
+</head>
+<body>
+    
+    <header class="header">
+        <a href="#" class="logo"> logo </a>
+
+        <nav class="navbar">
+            <a href="P_home.html"> Home </a>
+            <a href="#"> About </a>
+            <a href="P_profile.html"> Profile </a>
+            <a href="#"> Contact </a>
+        </nav>
+    </header>
+
+    <div class="home">
+        <div class="allInfo">
+
+            <h1> Welcome </h1>
+
+            <div class="data">
+                <div>
+                    <div class="info">Account Email</div>
+                    <div class="in">ahmed@gmail.com</div>
+                </div>
+
+                <div>
+                    <div class="info">Tel</div>
+                    <div class="in">0123456789</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="user-img">
+            <img src="user.jpeg" id="photo">
+        </div>
+
+    </div>
+    
+
+    <div class="do">
+        <button id="completedFlights"  class="active">Completed flights</button>
+        <button id="currentFlights">Current flights</button>
+        <button>Search a flight</button>
+    </div>
+
+
+<table id="table1" width= "50%" height="40pz" border ="1">
+<h2 id="table1Header" style="display: none;">Completed Flights</h2>
+
+  <tr >
+    <th> Arrival</th>
+    <th>Depature</th>
+    <th>Destination</th>
+	<th>Source</th>
+	<th>Airline</th>
+	<th>Action</th>
+  </tr>
+  
+</table>
+
+<h2 id="table2Header" style="display: none;">Current Flights</h2>
+<table id="table2" width= "50%" height="40pz" border ="1" style="display: none;" >
+  <tr>
+    <th> Arrival</th>
+    <th>Depature</th>
+    <th>Destination</th>
+	<th>Source</th>
+	<th>Airline</th>
+	<th>Action</th>
+  </tr>
+  
+</table>
+ <script>
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Set default state to "Completed Flights"
+            document.getElementById("table1Header").style.display = "block";
+            document.getElementById("table1").style.display = "table";
+        });
+
+        document.getElementById("completedFlights").addEventListener("click", function() {
+            document.getElementById("table1Header").style.display = "block";
+            document.getElementById("table1").style.display = "table";
+            document.getElementById("table2Header").style.display = "none";
+            document.getElementById("table2").style.display = "none";
+
+            // Set active class for the button
+            document.getElementById("completedFlights").classList.add("active");
+            document.getElementById("currentFlights").classList.remove("active");
+        });
+
+        document.getElementById("currentFlights").addEventListener("click", function() {
+            document.getElementById("table1Header").style.display = "none";
+            document.getElementById("table1").style.display = "none";
+            document.getElementById("table2Header").style.display = "block";
+            document.getElementById("table2").style.display = "table";
+
+            // Set active class for the button
+            document.getElementById("currentFlights").classList.add("active");
+            document.getElementById("completedFlights").classList.remove("active");
+        });
+
+</script>
+
+</body>
+</html>
