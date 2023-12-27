@@ -63,7 +63,7 @@ if ($userid && $flightId) {
 
                 if ($stmtInsert->execute()) {
                     echo "Record added to flights_users table.";
-                    header ("Location: /Flight-Booking-Website/Frontend/passenger_flights.php?userid=" . urlencode($userid));
+                    header("Location: /Flight-Booking-Website/Backend/take_seat.php?userid=" . urlencode($userid) . "&flightid=" . urlencode($flightId));
                 } else {
                     echo "Error adding record to flights_users table: " . $stmtInsert->error;
                 }

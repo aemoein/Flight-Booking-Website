@@ -139,7 +139,7 @@
                 <li><a href="/Flight-Booking-Website/Frontend/search_flights.php?userid=<?php echo urlencode($userid) ?>">Search Flights</a></li>
                 <li><a href="/Flight-Booking-Website/Frontend/passenger_flights.php?userid=<?php echo urlencode($userid) ?>">Flights</a></li>
                 <li><a href="/Flight-Booking-Website/Frontend/passenger_profile.php?userid=<?php echo urlencode($userid) ?>">Profile</a></li>
-                <li><a href="#">Messages</a></li>
+                <li><a href="/Flight-Booking-Website/Frontend/messages.php?userid=<?php echo urlencode($userid) ?>">Messages</a></li>
             </ul>
     </nav>
 

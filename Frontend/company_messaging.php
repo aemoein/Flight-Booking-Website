@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Booking System - Signup</title>
+    <title>Company Profile</title>
 
-    <link rel="stylesheet" href="company_info.css">
-    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="company_info.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="search_flights.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="signup.css?v=<?php echo time(); ?>">
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <script src="signup.js"></script>
 
     <script>
         function getQueryParam(name) {
@@ -22,7 +22,7 @@
 
         $(document).ready(function () {
             const company_id = getQueryParam("company_id");
-        
+
             if (company_id) {
                 $("#company_id").val(company_id);
             }
@@ -81,43 +81,35 @@
                 <li><a href="/Flight-Booking-Website/Frontend/company_profile.php/<?php echo urlencode($company_id) ?>">Profile</a></li>
                 <li><a href="/Flight-Booking-Website/Frontend/company_messaging.php?company_id=<?php echo urlencode($company_id) ?>">Messages</a></li>
             </ul>
-    </nav> 
-    <section id="flight-list">
-        <h3>Flights</h3>
-        <div class="flight-cards-container">
+    </nav>
+
+    <div class="signx-form">
+        <h2>Message</h2>
+        <form action="/Flight-Booking-Website/Backend/company_messaging.php" method="post">
+        <label for="userid">User:</label>
+        <select id="userid" name="userid">
             <?php
-            // Assuming $company_id is available
-            $sql = "SELECT f.id, f.remaining_seats AS remaining_seats, d.name AS departure_city, d.country AS departure_country,
-                        des.name AS destination_city, des.country AS destination_country,
-                        f.departure_time, f.arrival_time, f.price, u.username, p.name_model AS plane_name
-                    FROM flights f
-                    JOIN company_data u ON f.company_id = u.user_id
-                    JOIN plane p ON f.plane_id = p.id
-                    JOIN cities d ON f.departure_city_id = d.id
-                    JOIN cities des ON f.destination_city_id = des.id
-                    WHERE f.company_id = $company_id";
+            $userQuery = "SELECT id, name FROM users WHERE userType='passenger'";
+            $userResult = $conn->query($userQuery);
 
-            $result = $conn->query($sql);
-
-            if ($result !== false && $result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    ?>
-                    <div class="flight-card">
-                        <h4><?php echo htmlspecialchars($row['plane_name']); ?></h4>
-                        <p><?php echo htmlspecialchars($row['departure_city']); ?>, <?php echo htmlspecialchars($row['departure_country']); ?> to <?php echo htmlspecialchars($row['destination_city']); ?>, <?php echo htmlspecialchars($row['destination_country']); ?></p>
-                        <p>Departure: <?php echo date('M d, Y H:i', strtotime($row['departure_time'])); ?></p>
-                        <p>Arrival: <?php echo date('M d, Y H:i', strtotime($row['arrival_time'])); ?></p>
-                        <p>Price: $<?php echo number_format($row['price'], 2); ?></p>
-                        <p>Company: <?php echo htmlspecialchars($row['username']); ?></p>
-                        <p>Remaining Seats: <?php echo htmlspecialchars($row['remaining_seats']); ?></p>
-                    </div>
-                    <?php
+            if ($userResult !== false && $userResult->num_rows > 0) {
+                while ($user = $userResult->fetch_assoc()) {
+                    echo "<option value=\"{$user['id']}\">{$user['name']}</option>";
                 }
-            } else {
-                echo "<p>No flights available</p>";
             }
             ?>
-        </div>
-    </section>
+        </select>
+
+        <input type='hidden' class='company_id' id='company_id' name="company_id">
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+
+        <button type="submit">Save</button>
+    </div>
+
+
+
 </body>
 </html>

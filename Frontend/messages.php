@@ -80,48 +80,36 @@
                 <li><a href="/Flight-Booking-Website/Frontend/passenger_flights.php?userid=<?php echo urlencode($userid) ?>">Flights</a></li>
                 <li><a href="/Flight-Booking-Website/Frontend/passenger_profile.php?userid=<?php echo urlencode($userid) ?>">Profile</a></li>
                 <li><a href="/Flight-Booking-Website/Frontend/messages.php?userid=<?php echo urlencode($userid) ?>">Messages</a></li>
-            </ul>
+    </ul>
     </nav>
 
-    <section id="profile-edit" class="signx-form">
-        <h2>Search Flights</h2>
-        <form action="display_search.php?userid=<?php echo urlencode($userid) ?>" method="post">
-            <label for="departure_city">Departure City:</label>
-            <select id="departure_city" name="departure_city">
-                <?php
-                    $citiesQuery = "SELECT id, name, country FROM cities";
-                    $citiesResult = $conn->query($citiesQuery);
+    <div class="signx-form">
+        <h2>Message</h2>
+        <form action="/Flight-Booking-Website/Backend/messaging.php" method="post">
+        <label for="company_id">Company:</label>
+        <select id="company_id" name="company_id">
+            <?php
+            $companiesQuery = "SELECT user_id, username FROM company_data";
+            $companiesResult = $conn->query($companiesQuery);
 
-                    if ($citiesResult !== false && $citiesResult->num_rows > 0) {
-                        while ($city = $citiesResult->fetch_assoc()) {
-                            echo "<option value=\"{$city['id']}\">{$city['name']}, {$city['country']}</option>";
-                        }
-                    }
-                ?>
-            </select>
+            if ($companiesResult !== false && $companiesResult->num_rows > 0) {
+                while ($company = $companiesResult->fetch_assoc()) {
+                    echo "<option value=\"{$company['user_id']}\">{$company['username']}</option>";
+                }
+            }
+            ?>
+        </select>
 
-            <label for="destination_city">Destination City:</label>
-            <select id="destination_city" name="destination_city">
-                <?php
-                    $citiesResult = $conn->query($citiesQuery);
+        <input type='hidden' class='userid' id='userid' name="userid">
 
-                    if ($citiesResult !== false && $citiesResult->num_rows > 0) {
-                        while ($city = $citiesResult->fetch_assoc()) {
-                            echo "<option value=\"{$city['id']}\">{$city['name']}, {$city['country']}</option>";
-                        }
-                    }
-                ?>
-            </select>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
 
-            <label for="fromDate">From Date:</label>
-            <input type="date" id="fromDate" required>
 
-            <button type="submit">Search</button>
-        </form>
-    </section>
+        <button type="submit">Save</button>
+    </div>
 
-    <footer>
-        <p>&copy; 2023 FlyEase</p>
-    </footer>
+
+
 </body>
 </html>

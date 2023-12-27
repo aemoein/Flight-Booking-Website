@@ -22,14 +22,63 @@
             const email = getQueryParam("email");
             if (email) {
                // alert("Email: " + email);
-
-                // Set the email value to the hidden input field
                 $("#email").val(email);
             }
         });
     </script>
 
-    
+    <style>
+        .hero {
+        height: 100vh;
+        background-image: url("https://wallpapercave.com/dwp2x/wp3528296.jpg");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #ffffff;
+        }
+
+        .hero h1 {
+        font-size: 30px;
+        margin: 0px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+        }
+
+        .hero p {
+        font-size: 24px;
+        margin: 0px;
+        text-align: center;
+        margin-bottom: 40px;
+        }
+
+        .btn {
+        display: inline-block;
+        background-color: #3d5a80;
+        text-align: center;
+        opacity: 95%;
+        margin: 0px;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 10px 20px;
+        border-radius: 4px;
+        transition: background-color 0.2s ease;
+        }
+
+        .hero .container{
+        justify-content: center;
+        align-items: center;
+        top:0;
+        }
+
+        .btn:hover {
+        background-color: #005388;
+        }
+    </style>
 </head>
 <body>
 <?php
@@ -59,7 +108,6 @@
                 $row = $result->fetch_assoc();
                 return $row['id'];
             } else {
-                // Handle the case where the email is not found
                 echo ("Email not found!");
             }
         }
@@ -77,8 +125,16 @@
                 <li><a href="/Flight-Booking-Website/Frontend/search_flights.php?userid=<?php echo urlencode($userid) ?>">Search Flights</a></li>
                 <li><a href="/Flight-Booking-Website/Frontend/passenger_flights.php?userid=<?php echo urlencode($userid) ?>">Flights</a></li>
                 <li><a href="/Flight-Booking-Website/Frontend/passenger_profile.php?userid=<?php echo urlencode($userid) ?>">Profile</a></li>
-                <li><a href="#">Messages</a></li>
+                <li><a href="/Flight-Booking-Website/Frontend/messages.php?userid=<?php echo urlencode($userid) ?>">Messages</a></li>
             </ul>
     </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1 class = "hero-title">Experience the World</h1>
+            <p class = "hero-desc">Discover new places and create unforgettable memories.</p>
+            <a href="/Flight-Booking-Website/Frontend/search_flights.php?userid=<?php echo urlencode($userid) ?>" class="btn">Explore Destinations</a>
+        </div>
+    </section>
 </body>
 </html>

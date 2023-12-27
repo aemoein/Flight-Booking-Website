@@ -66,12 +66,6 @@
 
             // Call the function to get the user email
             $email = getUserEmail($company_id);
-
-            if ($email) {
-                echo "User Email: $email";
-            } else {
-                echo "User not found or email not available.";
-            }
         } else {
             echo "User ID not provided in the URL.";
         }
@@ -85,7 +79,7 @@
                 <li><a href="/Flight-Booking-Website/Frontend/add_flights.php?company_id=<?php echo urlencode($company_id); ?>">Add Flights</a></li>
                 <li><a href="/Flight-Booking-Website/Frontend/display_flights.php?company_id=<?php echo urlencode($company_id) ?>">Flights</a></li>
                 <li><a href="/Flight-Booking-Website/Frontend/company_profile.php/<?php echo urlencode($company_id) ?>">Profile</a></li>
-                <li><a href="#">Messages</a></li>
+                <li><a href="/Flight-Booking-Website/Frontend/company_messaging.php?company_id=<?php echo urlencode($company_id) ?>">Messages</a></li>
             </ul>
     </nav> 
 

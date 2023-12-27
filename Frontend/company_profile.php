@@ -136,7 +136,7 @@
                 <li><a href="/Flight-Booking-Website/Frontend/add_flights.php?company_id=<?php echo urlencode($companyId); ?>">Add Flights</a></li>
                 <li><a href="/Flight-Booking-Website/Frontend/display_flights.php?company_id=<?php echo urlencode($companyId) ?>">Flights</a></li>
                 <li><a href="/Flight-Booking-Website/Frontend/company_profile.php/<?php echo urlencode($companyId) ?>">Profile</a></li>
-                <li><a href="#">Messages</a></li>
+                <li><a href="/Flight-Booking-Website/Frontend/company_messaging.php?company_id=<?php echo urlencode($companyId) ?>"">Messages</a></li>
             </ul>
     </nav> 
 

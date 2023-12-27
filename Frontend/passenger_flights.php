@@ -65,12 +65,6 @@
 
             // Call the function to get the user email
             $email = getUserEmail($userid);
-
-            if ($email) {
-                echo "User Email: $email";
-            } else {
-                echo "User not found or email not available.";
-            }
         } else {
             echo "User ID not provided in the URL.";
         }
@@ -84,69 +78,77 @@
                 <li><a href="/Flight-Booking-Website/Frontend/search_flights.php?userid=<?php echo urlencode($userid) ?>">Search Flights</a></li>
                 <li><a href="/Flight-Booking-Website/Frontend/passenger_flights.php?userid=<?php echo urlencode($userid) ?>">Flights</a></li>
                 <li><a href="/Flight-Booking-Website/Frontend/passenger_profile.php?userid=<?php echo urlencode($userid) ?>">Profile</a></li>
-                <li><a href="#">Messages</a></li>
+                <li><a href="/Flight-Booking-Website/Frontend/messages.php?userid=<?php echo urlencode($userid) ?>">Messages</a></li>
             </ul>
     </nav>
 
     <section id="flight-list">
         <h3>Flights</h3>
         <div class="flight-cards-container">
-            <?php
-                function getUserFlights($userid)
-                {
-                    global $conn;
-                    $flightsQuery = "SELECT fu.*, f.departure_time, f.arrival_time, f.price, f.remaining_seats, 
-                                            c.username AS company_name, p.name_model AS plane_name, 
-                                            d.name AS departure_city, d.country AS departure_country, 
-                                            des.name AS destination_city, des.country AS destination_country
-                                            FROM flights_users fu
-                                            JOIN flights f ON fu.flight_id = f.id
-                                            JOIN company_data c ON f.company_id = c.user_id
-                                            JOIN plane p ON f.plane_id = p.id
-                                            JOIN cities d ON f.departure_city_id = d.id
-                                            JOIN cities des ON f.destination_city_id = des.id
-                                            WHERE fu.user_id = ?";
+        <?php
+            function getUserFlights($userid)
+            {
+                global $conn;
+                $flightsQuery = "SELECT fu.user_id, fu.flight_id AS flight_idx, fu.id, f.departure_time, f.arrival_time, f.price, f.remaining_seats, 
+                                        c.username AS company_name, p.name_model AS plane_name, 
+                                        d.name AS departure_city, d.country AS departure_country, 
+                                        des.name AS destination_city, des.country AS destination_country
+                                        FROM flights_users fu
+                                        JOIN flights f ON fu.flight_id = f.id
+                                        JOIN company_data c ON f.company_id = c.user_id
+                                        JOIN plane p ON f.plane_id = p.id
+                                        JOIN cities d ON f.departure_city_id = d.id
+                                        JOIN cities des ON f.destination_city_id = des.id
+                                        WHERE fu.user_id = ?";
 
-                    $stmt = $conn->prepare($flightsQuery);
-                    $stmt->bind_param("i", $userid);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
+                $stmt = $conn->prepare($flightsQuery);
+                $stmt->bind_param("i", $userid);
+                $stmt->execute();
+                $result = $stmt->get_result();
 
-                    if ($result !== false && $result->num_rows > 0) {
-                        return $result->fetch_all(MYSQLI_ASSOC);
-                    }
-
-                    return [];
+                if ($result !== false && $result->num_rows > 0) {
+                    return $result->fetch_all(MYSQLI_ASSOC);
                 }
 
-                // Get the user_id from the URL
-                if (isset($_GET['userid'])) {
-                    $userid = $_GET['userid'];
+                return [];
+            }
 
-                    // Call the function to get user flights
-                    $userFlights = getUserFlights($userid);
+            // Get the user_id from the URL
+            if (isset($_GET['userid'])) {
+                $userid = $_GET['userid'];
 
-                    // Display the flight details
-                    if (!empty($userFlights)) {
+                // Call the function to get user flights
+                $userFlights = getUserFlights($userid);
 
-                        foreach ($userFlights as $flight) {
-                            echo "<div class='flight-card'>";
-                            echo "<h4>{$flight['plane_name']}</h4>";
-                            echo "<p>{$flight['departure_city']}, {$flight['departure_country']} to {$flight['destination_city']}, {$flight['destination_country']}</p>";
-                            echo "<p>Departure: {$flight['departure_time']}</p>";
-                            echo "<p>Arrival: {$flight['arrival_time']}</p>";
-                            echo "<p>Price: $" . number_format($flight['price'], 2) . "</p>";
-                            echo "<p>Remaining Seats: {$flight['remaining_seats']}</p>";
-                            echo "<p>Company: {$flight['company_name']}</p>";
-                            echo "</div>";
-                        }
-                    } else {
-                        echo "<p>No flights found for the user.</p>";
+                // Display the flight details
+                if (!empty($userFlights)) {
+
+                    foreach ($userFlights as $flight) {
+                        echo "<div class='flight-card'>";
+                        echo "<h4>{$flight['plane_name']}</h4>";
+                        echo "<p>{$flight['departure_city']}, {$flight['departure_country']} to {$flight['destination_city']}, {$flight['destination_country']}</p>";
+                        echo "<p>Departure: {$flight['departure_time']}</p>";
+                        echo "<p>Arrival: {$flight['arrival_time']}</p>";
+                        echo "<p>Price: $" . number_format($flight['price'], 2) . "</p>";
+                        echo "<p>Remaining Seats: {$flight['remaining_seats']}</p>";
+                        echo "<p>Company: {$flight['company_name']}</p>";
+
+                        // Add a button for canceling the flight
+                        echo "<form action='/Flight-Booking-Website/Backend/cancel_flight.php' method='post'>";
+                        echo "<input type='hidden' name='userid' value='" . urlencode($userid) . "'>";
+                        echo "<input type='hidden' name='flightid' value='" . urlencode($flight['flight_idx']) . "'>";
+                        echo "<button type='submit'>Cancel Flight</button>";
+                        echo "</form>";
+
+                        echo "</div>";
                     }
                 } else {
-                    echo "User ID not provided in the URL.";
+                    echo "<p>No flights found for the user.</p>";
                 }
-            ?>
+            } else {
+                echo "User ID not provided in the URL.";
+            }
+        ?>
         </div>
     </section>
 

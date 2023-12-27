@@ -110,16 +110,16 @@
         }
     ?>
     <nav class="navbar">
-        <div class="container">
-            <h1><a href="/Flight-Booking-Website/Frontend/index.html" style="text-decoration: none; color: inherit;">FlyEase</a></h1>
-        </div>
-        <ul>
-            <li><a href="/Flight-Booking-Website/Frontend/company_dashboard.php?email=<?php echo $email ?>">Home</a></li>
-            <li><a href="/Flight-Booking-Website/Frontend/add_flights.php?company_id=<?php echo urlencode($user_id); ?>">Add Flights</a></li>
-            <li><a href="/Flight-Booking-Website/Frontend/display_flights.php?company_id=<?php echo urlencode($user_id); ?>">Flights</a></li>
-            <li><a href="/Flight-Booking-Website/Frontend/company_profile.php/<?php echo $user_id ?>">Profile</a></li>
-            <li><a href="#">Messages</a></li>
-        </ul>
+            <div class="container">
+                <h1><a href="/Flight-Booking-Website/Frontend/index.html" style="text-decoration: none; color: inherit;">FlyEase</a></h1>
+            </div>
+            <ul>
+                <li><a href="/Flight-Booking-Website/Frontend/company_dashboard.php?email=<?php echo $email ?>">Home</a></li>
+                <li><a href="/Flight-Booking-Website/Frontend/add_flights.php?company_id=<?php echo urlencode($user_id); ?>">Add Flights</a></li>
+                <li><a href="/Flight-Booking-Website/Frontend/display_flights.php?company_id=<?php echo urlencode($user_id) ?>">Flights</a></li>
+                <li><a href="/Flight-Booking-Website/Frontend/company_profile.php/<?php echo urlencode($user_id) ?>">Profile</a></li>
+                <li><a href="/Flight-Booking-Website/Frontend/company_messaging.php?company_id=<?php echo urlencode($user_id) ?>">Messages</a></li>
+            </ul>
     </nav> 
 
     <section id="hero-section" style="background-image: url('../Backend/<?php echo $logoImagePath; ?>');">

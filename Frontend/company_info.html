@@ -16,7 +16,6 @@
         $(document).ready(function () {
             const email = getQueryParam("email");
             if (email) {
-                alert("Email: " + email);
 
                 // Set the email value to the hidden input field
                 $("#email").val(email);
@@ -31,7 +30,7 @@
         </div>
     </nav>
 
-    <div class="">
+    <div class="signx-form">
         <h2>Company Information</h2>
         <form id="companyInfoForm" method="post" action="../Backend/process_company_info.php" enctype="multipart/form-data">
             <!-- Add a hidden input field for the email parameter -->
