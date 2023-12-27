@@ -54,89 +54,77 @@
         }
     </script>
 
-<script>
-    $(document).ready(function () {
-        // Get the last segment of the path, which is the company_id
-        const companyId = window.location.pathname.split('/').pop();
-        console.log("companyId:", companyId);  // Check the value in the console
-        if (companyId) {
-            $("#company_id").val(companyId);
-        }
-    });
-</script>
+    <script>
+        $(document).ready(function () {
+            // Get the last segment of the path, which is the company_id
+            const companyId = window.location.pathname.split('/').pop();
+            console.log("companyId:", companyId);  // Check the value in the console
+            if (companyId) {
+                $("#company_id").val(companyId);
+            }
+        });
+    </script>
 
 </head>
 <body>
-    <?php
+<?php
         include('../Backend/config.php');
 
-        function getCompanyData($companyId) {
+        function getUserEmail($company_id) {
             global $conn;
-            $sql = "SELECT c.*, u.name , u.email, u.tel FROM company_data c
-                    JOIN users u ON c.user_id = u.id
-                    WHERE c.user_id = ?";
+            $sql = "SELECT email FROM users WHERE id = ?";
+            
             $stmt = $conn->prepare($sql);
 
             if (!$stmt) {
                 die("Error preparing statement: " . $conn->error);
             }
 
-            $stmt->bind_param("i", $companyId);
+            $stmt->bind_param("i", $company_id);
             $stmt->execute();
 
             if ($stmt->errno) {
                 die("Error executing statement: " . $stmt->error);
             }
 
-            $result = $stmt->get_result();
+            $stmt->bind_result($email);
+            if (!$stmt->fetch()) {
+                return null; 
+            }
+
             $stmt->close();
 
-            return $result->fetch_assoc();
+            return $email;
         }
 
-        $urlSegments = explode('/', $_SERVER['REQUEST_URI']);
-        $companyId = end($urlSegments);
+        // Get the user_id from the URL
+        if (isset($_GET['company_id'])) {
+            $company_id = $_GET['company_id'];
 
-        if (!empty($companyId)) {
-            $companyData = getCompanyData($companyId);
+            // Call the function to get the user email
+            $email = getUserEmail($company_id);
 
-            if ($companyData) {
-                $username = $companyData['name'];
-                $companyName = $companyData['username'];
-                $logoImagePath = $companyData['logo_img_path'];
-                $bio = $companyData['bio'];
-                $address = $companyData['address'];
-                $location = $companyData['location'];
-                $email = $companyData['email'];
-                $tel = $companyData['tel'];
-
-                //echo "<h1>{$companyData['username']}</h1>";
-                //echo "<p>Company Name: {$companyName}</p>";
-                //echo "<p>Logo Image Path: {$logoImagePath}</p>";
-                //echo "<p>Bio: {$bio}</p>";
-                //echo "<p>Address: {$address}</p>";
-                //echo "<p>Location: {$location}</p>";
-                //echo "<p>Email: {$email}</p>";
-                //echo "<p>Telephone: {$tel}</p>";
+            if ($email) {
+                echo "User Email: $email";
             } else {
-                echo "<p>Company not found</p>";
+                echo "User not found or email not available.";
             }
         } else {
-            echo "<p>Company ID not provided in the URL</p>";
+            echo "User ID not provided in the URL.";
         }
     ?>
     
     <nav class="navbar">
-        <div class="container">
-            <h1><a href="../index.html" style="text-decoration: none; color: inherit;">FlyEase</a></h1>
-        </div>
-        <ul>
-            <li><a href="/Flight-Booking-Website/Frontend/company_dashboard.php?email=<?php echo $email ?>">Home</a></li>
-            <li><a href="#">Add Flight</a></li>
-            <li><a href="#">Flights</a></li>
-            <li><a href="/Flight-Booking-Website/Frontend/company_profile.php/<?php echo $companyId ?>">Profile</a></li>
-            <li><a href="#">Messages</a></li>
-        </ul>
+            <div class="container">
+                <h1><a href="/Flight-Booking-Website/Frontend/index.html" style="text-decoration: none; color: inherit;">FlyEase</a></h1>
+            </div>
+            <ul>
+                <li><a href="/Flight-Booking-Website/Frontend/company_dashboard.php?email=<?php echo $email ?>">Home</a></li>
+                <li><a href="/Flight-Booking-Website/Frontend/add_flights.php?company_id=<?php echo urlencode($companyId); ?>">Add Flights</a></li>
+                <li><a href="/Flight-Booking-Website/Frontend/display_flights.php?company_id=<?php echo urlencode($companyId) ?>">Flights</a></li>
+                <li><a href="/Flight-Booking-Website/Frontend/company_profile.php/<?php echo urlencode($companyId) ?>">Profile</a></li>
+                <li><a href="#">Messages</a></li>
+            </ul>
     </nav> 
 
     <section id="hero-section" style="background-image: url('../../Backend/<?php echo $logoImagePath; ?>');">

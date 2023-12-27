@@ -111,12 +111,12 @@
     ?>
     <nav class="navbar">
         <div class="container">
-            <h1><a href="index.html" style="text-decoration: none; color: inherit;">FlyEase</a></h1>
+            <h1><a href="/Flight-Booking-Website/Frontend/index.html" style="text-decoration: none; color: inherit;">FlyEase</a></h1>
         </div>
         <ul>
             <li><a href="/Flight-Booking-Website/Frontend/company_dashboard.php?email=<?php echo $email ?>">Home</a></li>
-            <li><a href="#">Add Flight</a></li>
-            <li><a href="#">Flights</a></li>
+            <li><a href="/Flight-Booking-Website/Frontend/add_flights.php?company_id=<?php echo urlencode($user_id); ?>">Add Flights</a></li>
+            <li><a href="/Flight-Booking-Website/Frontend/display_flights.php?company_id=<?php echo urlencode($user_id); ?>">Flights</a></li>
             <li><a href="/Flight-Booking-Website/Frontend/company_profile.php/<?php echo $user_id ?>">Profile</a></li>
             <li><a href="#">Messages</a></li>
         </ul>
@@ -138,9 +138,15 @@
         <h3>Flights</h3>
         <div class="flight-cards-container">
             <?php
-            $sql = "SELECT f.name, f.departure_from, f.destination, f.departure_time, f.arrival_time, f.price, u.username
+            $sql = "SELECT f.id, d.name AS departure_city, d.country AS departure_country,
+                        des.name AS destination_city, des.country AS destination_country,
+                        f.departure_time, f.arrival_time, f.price, u.username, p.name_model AS plane_name
                     FROM flights f
                     JOIN company_data u ON f.company_id = u.user_id
+                    JOIN plane p ON f.plane_id = p.id
+                    JOIN cities d ON f.departure_city_id = d.id
+                    JOIN cities des ON f.destination_city_id = des.id
+                    WHERE f.company_id = $user_id
                     LIMIT 4";
 
             $result = $conn->query($sql);
@@ -149,8 +155,8 @@
                 while ($row = $result->fetch_assoc()) {
                     ?>
                     <div class="flight-card">
-                        <h4><?php echo htmlspecialchars($row['name']); ?></h4>
-                        <p><?php echo htmlspecialchars($row['departure_from']); ?> to <?php echo htmlspecialchars($row['destination']); ?></p>
+                        <h4><?php echo htmlspecialchars($row['plane_name']); ?></h4>
+                        <p><?php echo htmlspecialchars($row['departure_city']); ?>, <?php echo htmlspecialchars($row['departure_country']); ?> to <?php echo htmlspecialchars($row['destination_city']); ?>, <?php echo htmlspecialchars($row['destination_country']); ?></p>
                         <p>Departure: <?php echo date('M d, Y H:i', strtotime($row['departure_time'])); ?></p>
                         <p>Arrival: <?php echo date('M d, Y H:i', strtotime($row['arrival_time'])); ?></p>
                         <p>Price: $<?php echo number_format($row['price'], 2); ?></p>
@@ -166,7 +172,6 @@
     </section>
 
 
-    
     <div id="chatbox-icon">
         <img src="Resources/icons8-chat-48.png" alt="Chat Icon">
     </div>
