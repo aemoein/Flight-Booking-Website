@@ -63,6 +63,8 @@ body {
     border-radius: 4px;
     cursor: pointer;
   }
+
+  
   
   button:hover {
     background-color: #45a049;
@@ -72,7 +74,7 @@ body {
     margin-top: auto;
   }
 
-  .result-box{
+  .result-box {
     width: 60%;
     padding: 20px;
     background-color: #fff;
@@ -81,4 +83,16 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-left: 20px;
   }
+
+  .information-box{
+    width: 60%;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 20px;
+  }
+  
+
   
