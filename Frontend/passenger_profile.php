@@ -83,7 +83,7 @@
     function getPassengerData($userid)
     {
         global $conn;
-        $sql = "SELECT p.*, u.name , u.email, u.tel FROM passenger_data p
+        $sql = "SELECT p.*, u.name , u.email, u.tel, u.account FROM passenger_data p
                     JOIN users u ON p.user_id = u.id
                     WHERE p.user_id = ?";
 
@@ -118,6 +118,7 @@
                 $passPath = $passengerData['passport_img_path'];
                 $email = $passengerData['email'];
                 $tel = $passengerData['tel'];
+                $account = $passengerData['account'];
             } else {
                 echo "<p>Passenger not found</p>";
             }
@@ -129,17 +130,17 @@
     }
     ?>
 
-    <nav class="navbar">
-        <div class="container">
-            <h1><a href="/Flight-Booking-Website/Frontend/index.html" style="text-decoration: none; color: inherit;">FlyEase</a></h1>
-        </div>
-        <ul>
-            <li><a href="/Flight-Booking-Website/Frontend/passenger_dashboard.php?email=<?php echo $email ?>">Home</a></li>
-            <li><a href="/Flight-Booking-Website/Frontend/add_flights.php?userid=<?php echo urlencode($userid); ?>">Add Flights</a></li>
-            <li><a href="/Flight-Booking-Website/Frontend/display_flights.php?userid=<?php echo urlencode($userid) ?>">Flights</a></li>
-            <li><a href="/Flight-Booking-Website/Frontend/company_profile.php/<?php echo urlencode($userid) ?>">Profile</a></li>
-            <li><a href="#">Messages</a></li>
-        </ul>
+<nav class="navbar">
+            <div class="container">
+                <h1><a href="/Flight-Booking-Website/Frontend/index.html" style="text-decoration: none; color: inherit;">FlyEase</a></h1>
+            </div>
+            <ul>
+                <li><a href="/Flight-Booking-Website/Frontend/passenger_dashboard.php?email=<?php echo $email ?>">Home</a></li>
+                <li><a href="#">Search Flights</a></li>
+                <li><a href="/Flight-Booking-Website/Frontend/passenger_flights.php?userid=<?php echo urlencode($userid) ?>">Flights</a></li>
+                <li><a href="/Flight-Booking-Website/Frontend/passenger_profile.php?userid=<?php echo urlencode($userid) ?>">Profile</a></li>
+                <li><a href="#">Messages</a></li>
+            </ul>
     </nav>
 
     <section id="hero-section" style="background-image: url('../Backend/<?php echo $photoPath; ?>');">
@@ -170,6 +171,7 @@
         </div>
         <p><strong>Email:</strong> <?php echo $email ?></p>
         <p><strong>Tel:</strong> <?php echo $tel ?></p>
+        <p><strong>Account Balance:</strong> $<?php echo number_format($account, 2) ?></p>
     </section>
 
     <section id="profile-edit" class="signx-form" style="display: none;">

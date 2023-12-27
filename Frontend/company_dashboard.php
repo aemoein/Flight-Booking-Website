@@ -138,7 +138,7 @@
         <h3>Flights</h3>
         <div class="flight-cards-container">
             <?php
-            $sql = "SELECT f.id, d.name AS departure_city, d.country AS departure_country,
+            $sql = "SELECT f.id, f.remaining_seats AS remaining_seats, d.name AS departure_city, d.country AS departure_country,
                         des.name AS destination_city, des.country AS destination_country,
                         f.departure_time, f.arrival_time, f.price, u.username, p.name_model AS plane_name
                     FROM flights f
@@ -161,6 +161,7 @@
                         <p>Arrival: <?php echo date('M d, Y H:i', strtotime($row['arrival_time'])); ?></p>
                         <p>Price: $<?php echo number_format($row['price'], 2); ?></p>
                         <p>Company: <?php echo htmlspecialchars($row['username']); ?></p>
+                        <p>Remaining Seats: <?php echo htmlspecialchars($row['remaining_seats']); ?></p>
                     </div>
                     <?php
                 }

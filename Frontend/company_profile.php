@@ -67,50 +67,63 @@
 
 </head>
 <body>
-<?php
+    <?php
         include('../Backend/config.php');
 
-        function getUserEmail($company_id) {
+        function getCompanyData($companyId) {
             global $conn;
-            $sql = "SELECT email FROM users WHERE id = ?";
-            
+            $sql = "SELECT c.*, u.name , u.email, u.tel, u.account FROM company_data c
+                    JOIN users u ON c.user_id = u.id
+                    WHERE c.user_id = ?";
             $stmt = $conn->prepare($sql);
 
             if (!$stmt) {
                 die("Error preparing statement: " . $conn->error);
             }
 
-            $stmt->bind_param("i", $company_id);
+            $stmt->bind_param("i", $companyId);
             $stmt->execute();
 
             if ($stmt->errno) {
                 die("Error executing statement: " . $stmt->error);
             }
 
-            $stmt->bind_result($email);
-            if (!$stmt->fetch()) {
-                return null; 
-            }
-
+            $result = $stmt->get_result();
             $stmt->close();
 
-            return $email;
+            return $result->fetch_assoc();
         }
 
-        // Get the user_id from the URL
-        if (isset($_GET['company_id'])) {
-            $company_id = $_GET['company_id'];
+        $urlSegments = explode('/', $_SERVER['REQUEST_URI']);
+        $companyId = end($urlSegments);
 
-            // Call the function to get the user email
-            $email = getUserEmail($company_id);
+        if (!empty($companyId)) {
+            $companyData = getCompanyData($companyId);
 
-            if ($email) {
-                echo "User Email: $email";
+            if ($companyData) {
+                $username = $companyData['name'];
+                $account = $companyData['account'];
+                $companyName = $companyData['username'];
+                $logoImagePath = $companyData['logo_img_path'];
+                $bio = $companyData['bio'];
+                $address = $companyData['address'];
+                $location = $companyData['location'];
+                $email = $companyData['email'];
+                $tel = $companyData['tel'];
+
+                //echo "<h1>{$companyData['username']}</h1>";
+                //echo "<p>Company Name: {$companyName}</p>";
+                //echo "<p>Logo Image Path: {$logoImagePath}</p>";
+                //echo "<p>Bio: {$bio}</p>";
+                //echo "<p>Address: {$address}</p>";
+                //echo "<p>Location: {$location}</p>";
+                //echo "<p>Email: {$email}</p>";
+                //echo "<p>Telephone: {$tel}</p>";
             } else {
-                echo "User not found or email not available.";
+                echo "<p>Company not found</p>";
             }
         } else {
-            echo "User ID not provided in the URL.";
+            echo "<p>Company ID not provided in the URL</p>";
         }
     ?>
     
@@ -150,6 +163,7 @@
         <p><strong>User Name:</strong> <?php echo $username ?></p>
         <p><strong>Email:</strong> <?php echo $email ?></p>
         <p><strong>Tel:</strong> <?php echo $tel ?></p>
+        <p><strong>Account Balance:</strong> $<?php echo number_format($account, 2) ?></p>
     </section>
 
     <section id="profile-edit" class="signx-form" style="display: none;">

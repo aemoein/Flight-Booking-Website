@@ -93,7 +93,7 @@
         <div class="flight-cards-container">
             <?php
             // Assuming $company_id is available
-            $sql = "SELECT f.id, d.name AS departure_city, d.country AS departure_country,
+            $sql = "SELECT f.id, f.remaining_seats AS remaining_seats, d.name AS departure_city, d.country AS departure_country,
                         des.name AS destination_city, des.country AS destination_country,
                         f.departure_time, f.arrival_time, f.price, u.username, p.name_model AS plane_name
                     FROM flights f
@@ -101,7 +101,7 @@
                     JOIN plane p ON f.plane_id = p.id
                     JOIN cities d ON f.departure_city_id = d.id
                     JOIN cities des ON f.destination_city_id = des.id
-                    WHERE f.company_id = $company_id"; // Use the WHERE clause to filter by company_id
+                    WHERE f.company_id = $company_id";
 
             $result = $conn->query($sql);
 
@@ -115,6 +115,7 @@
                         <p>Arrival: <?php echo date('M d, Y H:i', strtotime($row['arrival_time'])); ?></p>
                         <p>Price: $<?php echo number_format($row['price'], 2); ?></p>
                         <p>Company: <?php echo htmlspecialchars($row['username']); ?></p>
+                        <p>Remaining Seats: <?php echo htmlspecialchars($row['remaining_seats']); ?></p>
                     </div>
                     <?php
                 }
